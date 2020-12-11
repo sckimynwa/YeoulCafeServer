@@ -1,0 +1,8 @@
+# python virtual environment
+env/
+migrations/
+dist/
+__pycache__/
+db.sqlite3
+migrations/
+media/
