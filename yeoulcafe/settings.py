@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Custom Settings
+    'baristar',
+    'cafe',
+    'customer',
     'coffee',
+    'coffee_machine',
     'fridge',
 ]
 
