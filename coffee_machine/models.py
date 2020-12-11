@@ -24,7 +24,7 @@ class CoffeeMachine(models.Model):
         self.broken_status = False
         self.save()
 
-    def get_coffee(self, menu):
+    def make_coffee(self, menu):
         """
         커피를 만든다. 만들 수 없는 경우 False를 리턴한다.
         커피를 만드는데 필요한 재료는 냉장고에서 가져오고 냉장고는 하나만 있다고 가정한다.
