@@ -58,6 +58,7 @@ class Fridge(models.Model):
                 return True
             else:
                 return False
+
         elif coffee == 'Espresso':
             if not(self.is_empty_ingridients('bean', 1)) and not(self.is_empty_ingridients('water', 1)):
                 self.bean = self.bean - 1
