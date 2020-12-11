@@ -11,12 +11,12 @@ class CoffeeList(APIView):
     List all coffee 
     """
 
-    def get(self, request, format=None):
+    def get(self, request):
         coffee = Coffee.objects.all()
         serializer = CoffeeSerializer(coffee, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = CoffeeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -35,12 +35,12 @@ class CoffeeDetail(APIView):
         except Coffee.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, format=None):
+    def get(self, request, pk):
         coffee = self.get_object(pk)
         serializer = CoffeeSerializer(coffee)
         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
+    def put(self, request, pk):
         coffee = self.get_object(pk)
         serializer = CoffeeSerializer(coffee, data=request.data)
         if serializer.is_valid():
@@ -48,7 +48,7 @@ class CoffeeDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def delete(self, request, pk):
         coffee = self.get_object(pk)
         coffee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -2,6 +2,10 @@ from django.db import models
 
 
 class Coffee(models.Model):
+    """
+    Coffee Database Model.
+    includes Name & Price only
+    """
     name = models.CharField(max_length=100)
     price = models.IntegerField()
 
