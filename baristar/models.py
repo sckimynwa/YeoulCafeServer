@@ -22,8 +22,8 @@ class Baristar(models.Model):
         커피를 만들 수 없는 경우 False를 리턴한다
         커피가 만들어진 경우 True를 리턴한다.
         """
-        coffeeMachine = CoffeeMachine.objects.get(pk=1)
-        if coffeeMachine.get_coffee(menu):
+        coffee_machine = CoffeeMachine.objects.get(pk=1)
+        if coffee_machine.make_coffee(menu):
             return True
         else:
             return False
