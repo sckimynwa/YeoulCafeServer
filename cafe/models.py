@@ -2,25 +2,34 @@ from django.db import models
 from django.http import Http404
 from baristar.models import Baristar
 from coffee.models import Coffee
-from coffee_machine.models import CoffeeMachine
-from fridge.models import Fridge
 
 
 class Cafe(models.Model):
     """
     Cafe Model
     """
+    id = models.BigAutoField(primary_key=True)
     balance = models.IntegerField(default=1000000)
 
-    def get_cafe(self, pk):
+    def get_baristar(self):
         try:
-            return Cafe.objects.get(pk=pk)
-        except Cafe.DoesNotExist:
+            return Baristar.objects.get(cafe_id=self.id)
+        except Baristar.DoesNotExist:
             raise Http404
 
-    def get_coffee(self, menu):
-        coffee = Coffee.objects.get(name=menu)
-        baristar = Baristar.objects.get(pk=1)
+    def get_coffee(self):
+        try:
+            return Coffee.objects.get(cafe_id=self.id)
+        except Coffee.DoesNotExist:
+            raise Http404
+
+    def make_coffee(self, menu):
+        """
+        Make Coffee
+        if Coffee is Made, return True, else return False
+        """
+        baristar = self.get_baristar()
+        coffee = self.get_coffee()
 
         if baristar.make_coffee(menu):
             self.balance = self.balance + coffee.get_price()

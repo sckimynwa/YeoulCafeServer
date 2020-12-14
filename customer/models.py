@@ -19,7 +19,8 @@ class Customer(models.Model):
 
     def order_coffee(self, menu):
         """
-        커피를 주문한다.
+        Order Coffee
+        Note that Only One Cafe Exists.
         """
         cafe = Cafe.objects.get(pk=1)
         coffee = Coffee.objects.get(name=menu)
@@ -29,7 +30,7 @@ class Customer(models.Model):
             return False
 
         # Order Coffee
-        if cafe.get_coffee(menu):
+        if cafe.make_coffee(menu):
             self.balance = self.balance - coffee.get_price()
             self.save()
             return True

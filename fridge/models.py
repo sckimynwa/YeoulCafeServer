@@ -10,6 +10,7 @@ class Fridge(models.Model):
     milk = models.IntegerField(default=100)
     bean = models.IntegerField(default=100)
     water = models.IntegerField(default=100)
+    cafe_id = models.ForeignKey('cafe.Cafe', on_delete=models.CASCADE)
 
     def get_fridge(self, pk):
         try:

@@ -10,6 +10,7 @@ class CoffeeMachine(models.Model):
 
     name = models.CharField(max_length=100)
     broken_status = models.BooleanField(default=False)
+    cafe_id = models.ForeignKey('cafe.Cafe', on_delete=models.CASCADE)
 
     def get_coffee_machine(self, pk):
         try:
@@ -20,7 +21,7 @@ class CoffeeMachine(models.Model):
     def get_coffee_machine_status(self):
         return self.broken_status
 
-    def fix_coffee_machin(self):
+    def fix_coffee_machine(self):
         self.broken_status = False
         self.save()
 
@@ -30,7 +31,7 @@ class CoffeeMachine(models.Model):
         커피를 만드는데 필요한 재료는 냉장고에서 가져오고 냉장고는 하나만 있다고 가정한다.
         추후 여러 개의 냉장고가 추가될 경우 재료가 있는 냉장고 중 하나에서 가져오면 된다.
         """
-        fridge = Fridge.objects.get(pk=1)
+        fridge = Fridge.objects.get(cafe_id=self.cafe_id)
 
         # Coffee Machine Status Check
         if self.broken_status:
