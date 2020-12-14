@@ -8,6 +8,7 @@ class Coffee(models.Model):
     """
     name = models.CharField(max_length=100)
     price = models.IntegerField()
+    cafe_id = models.ForeignKey('cafe.Cafe', on_delete=models.CASCADE)
 
     def get_name(self):
         return self.name

@@ -17,9 +17,9 @@ class Cafe(models.Model):
         except Baristar.DoesNotExist:
             raise Http404
 
-    def get_coffee(self):
+    def get_coffee(self, menu):
         try:
-            return Coffee.objects.get(cafe_id=self.id)
+            return Coffee.objects.get(name=menu)
         except Coffee.DoesNotExist:
             raise Http404
 
@@ -29,7 +29,7 @@ class Cafe(models.Model):
         if Coffee is Made, return True, else return False
         """
         baristar = self.get_baristar()
-        coffee = self.get_coffee()
+        coffee = self.get_coffee(menu=menu)
 
         if baristar.make_coffee(menu):
             self.balance = self.balance + coffee.get_price()
