@@ -20,6 +20,9 @@ class OrderCoffee(APIView):
             raise Http404
 
     def post(self, request):
+        if request.user.is_anonymous:
+            return Response(status=401)
+
         customer = self.get_customer(request.user)
         menu = request.data['name']
 
