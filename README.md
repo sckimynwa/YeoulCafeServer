@@ -9,7 +9,6 @@ python3 -m venv env       // create your virtual environment
 source env/bin/activate   // activate your virtual environment
 pip3 install django djangorestframework
 sudo pip3 install pylint pylint-django
-
 ```
 
 2. Migrate Any Changes
