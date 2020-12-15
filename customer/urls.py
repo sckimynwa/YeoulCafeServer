@@ -5,5 +5,6 @@ from . import views
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('<int:pk>', views.OrderCoffee.as_view()),
+    path('order_coffee', views.OrderCoffee.as_view()),
+    path('signup', views.SignUp.as_view()),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.http import Http404
+from django.contrib.auth.models import User
 from cafe.models import Cafe
 from coffee.models import Coffee
 
@@ -10,6 +11,7 @@ class Customer(models.Model):
     """
     name = models.CharField(max_length=100)
     balance = models.IntegerField(default=10000)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def get_customer(self, pk):
         try:
