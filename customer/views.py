@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.http import Http404
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import Customer
 
@@ -39,3 +40,14 @@ class SignUp(APIView):
 
         token = Token.objects.create(user=user)
         return Response({"Token": token.key})
+
+
+class Login(APIView):
+    def post(self, request):
+        user = authenticate(
+            username=request.data['id'], password=request.data['password'])
+        if user is not None:
+            token = Token.objects.get(user=user)
+            return Response({"Token": token.key})
+        else:
+            return Response(status=401)
